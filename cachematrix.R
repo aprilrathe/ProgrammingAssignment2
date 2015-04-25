@@ -1,6 +1,6 @@
-## Functions to support a custom matrix object that maintains a cache its 
-## inverse. For use in programs requiring performance optimization for large 
-## matrices, where repeated access to the inverse is required.
+## Functions to support a custom matrix object that maintains a cache of its 
+## inverse. For use in calculations requiring performance optimization for 
+## large matrices, where repeated access to the inverse is required.
 
 ## Creates a custom matrix object that can cache its inverse.
 makeCacheMatrix <- function(x = matrix()) {
@@ -13,19 +13,18 @@ makeCacheMatrix <- function(x = matrix()) {
     setinverse <- function(inverse) inv <<- inverse
     getinverse <- function() inv
     list(set = set, get = get,
-         setinverse = setinverse,
-         getinverse = getinverse)
+        setinverse = setinverse,
+        getinverse = getinverse)
 }
-
 
 ## Calculates the inverse of the custom matrix returned by makeCacheMatrix. 
 ## If the inverse has already been calculated and the matrix has not changed, 
-## retrieves the inverse from the cache. Else calculates the inverse using the
+## retrieves the inverse from the cache. Else, calculates the inverse using the
 ## solve function.
 cacheSolve <- function(x, ...) {
     inv <- x$getinverse()
     if(!is.null(inv)) {
-        message("retrieving cached data")
+        message("retrieving cached inverse value")
         return(inv)
     }
     
